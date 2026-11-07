@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Início - Jogo Catecismo{% endblock %}
+{% block content %}
+<section class="menu">
+  <h1>✝️ Jogo Catecismo</h1>
+  <p class="subtitle">Atire nas pedras com números, responda perguntas de catecismo e não deixe nada te atingir!</p>
+
+  <div class="card how">
+    <h3>Como jogar</h3>
+    <ul>
+      <li>Arraste o dedo para mover o atirador para os lados.</li>
+      <li>Toque no botão <b>ATIRAR</b> para disparar para cima.</li>
+      <li>Pedras com número &gt; 1 se dividem quando são atingidas.</li>
+      <li>De tempos em tempos aparece uma <b>pergunta de catecismo</b> (pausa o jogo).</li>
+      <li>Acertar = +25 pontos · Errar = −10 pontos.</li>
+      <li>Se uma pedra tocar em você, você perde uma vida. Sem vidas = game over.</li>
+    </ul>
+  </div>
+
+  <div class="actions">
+    <a href="{{ url_for('game') }}" class="btn btn-big">▶ Iniciar Jogo</a>
+    <a href="{{ url_for('scores') }}" class="btn">🏆 Ver Placar</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Jogo - Jogo Catecismo{% endblock %}
+{% block content %}
+<section class="game-page">
+  <header class="hud">
+    <div class="hud-item">❤️ <span id="lives">3</span></div>
+    <div class="hud-item">💎 <span id="score">0</span></div>
+    <div class="hud-item" id="timer">0s</div>
+  </header>
+
+  <div class="canvas-wrap">
+    <canvas id="gameCanvas"></canvas>
+  </div>
+
+  <div class="controls">
+    <button class="ctrl" id="btnLeft">◀</button>
+    <button class="ctrl" id="btnRight">▶</button>
+    <button class="ctrl shoot" id="btnShoot">ATIRAR</button>
+  </div>
+
+  <!-- Modal de pergunta -->
+  <div id="modalQuiz" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-title">Pergunta de Catecismo</div>
+      <div id="quizText" class="quiz-text"></div>
+      <div id="quizOptions" class="quiz-options"></div>
+      <div id="quizFeedback" class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <!-- Game over -->
+  <div id="overlayGameOver" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-title">💀 Game Over</div>
+      <div class="go-score">Sua pontuação: <span id="finalScore">0</span></div>
+      <form id="formScore" novalidate>
+        <label for="playerName">Seu nome:</label>
+        <input type="text" id="playerName" maxlength="50" value="" placeholder="Digite seu nome" required>
+        <button type="submit" class="btn save-score">Salvar pontuação</button>
+      </form>
+      <div id="saveMsg" class="quiz-feedback"></div>
+      <p class="hint">Ou <a href="{{ url_for('scores') }}">veja o placar completo</a>.</p>
+    </div>
+  </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock %}

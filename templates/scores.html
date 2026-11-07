@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Placar - Jogo Catecismo{% endblock %}
+{% block content %}
+<section class="menu">
+  <h1>🏆 Placar</h1>
+  <table class="score-table" id="scoreTable">
+    <thead>
+      <tr><th>#</th><th>Jogador</th><th>Pontuação</th><th>Data</th></tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="4" style="text-align:center">Carregando...</td></tr>
+    </tbody>
+  </table>
+  <div class="actions" style="margin-top:16px">
+    <a href="{{ url_for('index') }}" class="btn">↩ Voltar ao início</a>
+  </div>
+</section>
+<script>
+fetch('/api/scores')
+  .then(r => r.json())
+  .then(data => {
+    const tb = document.querySelector('#scoreTable tbody');
+    tb.innerHTML = '';
+    if (!data.length) {
+      tb.innerHTML = '<tr><td colspan="4" style="text-align:center">Nenhum ponto ainda.</td></tr>';
+      return;
+    }
+    data.forEach((s, i) => {
+      const d = new Date(s.created_at || s.createdAt).toLocaleString('pt-BR');
+      tb.innerHTML += `<tr><td>${i+1}</td><td>${s.name}</td><td>${s.points}</td><td>${d}</td></tr>`;
+    });
+  })
+  .catch(() => {
+    document.querySelector('#scoreTable tbody').innerHTML =
+      '<tr><td colspan="4" style="text-align:center">Erro ao carregar o placar.</td></tr>';
+  });
+</script>
+{% endblock %}
